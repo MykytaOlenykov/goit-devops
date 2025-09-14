@@ -48,19 +48,21 @@ output "eks_node_role_arn" {
 }
 
 output "oidc_provider_arn" {
-  value = aws_iam_openid_connect_provider.oidc.arn
+  description = "OIDC Provider ARN"
+  value       = module.eks.oidc_provider_arn
 }
 
 output "oidc_provider_url" {
-  value = aws_iam_openid_connect_provider.oidc.url
+  description = "OIDC Provider URL"
+  value       = module.eks.oidc_provider_url
 }
-
 
 #-------------Jenkins-----------------
 output "jenkins_release" {
   description = "Jenkins release name"
   value       = module.jenkins.jenkins_release_name
 }
+
 output "jenkins_namespace" {
   description = "Jenkins namespace"
   value       = module.jenkins.jenkins_namespace
