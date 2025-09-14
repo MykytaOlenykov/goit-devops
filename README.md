@@ -8,6 +8,7 @@ lesson-7/
 ├── main.tf         # Main file for connecting modules
 ├── backend.tf      # Backend configuration (S3 + DynamoDB)
 ├── outputs.tf      # Global outputs
+├── variables.tf
 │
 ├── modules/        # Modules directory
 │   ├── s3-backend/ # Module for S3 and DynamoDB
@@ -27,11 +28,32 @@ lesson-7/
 │   │   ├── variables.tf
 │   │   └── outputs.tf
 │   │
-│   └── eks/        # Module for EKS Cluster
-│       ├── eks.tf
-│       ├── node.tf
+│   ├── eks/        # Module for EKS Cluster
+│   │   ├── aws_ebs_csi_driver.tf
+│   │   ├── eks.tf
+│   │   ├── node.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   │
+│   ├── jenkins/    # Module for Jenkins installation via Helm
+│   │   ├── jenkins.tf
+│   │   ├── variables.tf
+│   │   ├── providers.tf
+│   │   ├── values.yaml
+│   │   └── outputs.tf
+│   │
+│   └── argo_cd/    # Module for Argo CD installation via Helm
+│       ├── jenkins.tf
 │       ├── variables.tf
-│       └── outputs.tf
+│       ├── providers.tf
+│       ├── values.yaml
+│       ├── outputs.tf
+│	    └── charts/
+│ 	        ├── Chart.yaml
+│	        ├── values.yaml
+│	        └── templates/
+│	            ├── application.yaml
+│	            └── repository.yaml
 │
 ├── charts/         # Helm charts
 │   └── django-app/ # Django Helm chart
@@ -138,3 +160,15 @@ helm uninstall django-app
 - **Service**: exposes the app via `LoadBalancer` for external access.
 - **ConfigMap & Secret**: provide environment variables (**Postgres**).
 - **HPA**: automatically scales pods (2–6) when CPU load >70%.
+
+### 6. **Jenkins**
+
+- Installed via Helm.
+- Runs inside the EKS cluster and uses **Kaniko** to build Docker images.
+- Automates the **CI/CD pipeline**.
+
+### 7. **Argo CD**
+
+- Installed via Helm.
+- Watches the repository with Helm charts.
+- Provides a **GitOps approach**: automatically synchronizes the cluster with Git.
