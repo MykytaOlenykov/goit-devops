@@ -27,7 +27,7 @@ lesson-7/
 │   │   ├── variables.tf
 │   │   └── outputs.tf
 │   │
-│   └── eks/.       # Module for EKS Cluster
+│   └── eks/        # Module for EKS Cluster
 │       ├── eks.tf
 │       ├── node.tf
 │       ├── variables.tf
