@@ -54,7 +54,7 @@ spec:
           git clone https://$GITHUB_USER:$GITHUB_PAT@github.com/$GITHUB_USER/goit-devops.git
           cd goit-devops
           git checkout lesson-8-9
-          cd django
+          cd django-app
           cp -r . /workspace/
         '''
       }
