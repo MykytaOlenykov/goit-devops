@@ -35,6 +35,13 @@ lesson-7/
 │   │   ├── variables.tf
 │   │   └── outputs.tf
 │   │
+│   ├── rds/        # Module for RDS
+│   │   ├── rds.tf
+│   │   ├── aurora.tf
+│   │   ├── shared.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   │
 │   ├── jenkins/    # Module for Jenkins installation via Helm
 │   │   ├── jenkins.tf
 │   │   ├── variables.tf
@@ -172,3 +179,13 @@ helm uninstall django-app
 - Installed via Helm.
 - Watches the repository with Helm charts.
 - Provides a **GitOps approach**: automatically synchronizes the cluster with Git.
+
+### 5. **RDS Module**
+
+- Creates either a **standalone RDS instance** (PostgreSQL/MySQL) or an **Aurora cluster** depending on the flag `use_aurora`.
+- Automatically provisions:
+  - **DB Subnet Group**
+  - **Security Group**
+  - **Parameter Group** with basic settings (`max_connections`, `log_statement`, `work_mem`)
+- All main options (`engine`, `engine_version`, `instance_class`, `multi_az`, etc.) are configurable via variables.
+- Supports reusability across different environments (**dev/stage/prod**).
